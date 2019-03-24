@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+    <title>Login</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+    <div class="row pt-5">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <div class="card card-body">
+            <i class="text-center text-info fas fa-book-open fa-2x"></i>
+            <h3 class="text-info text-center">BlogPy</h3><hr>
+                <form class="horizontal-form" method="post" action="">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Username" name="username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password" name="password">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info" style="width: 100%;">Login</button>
+                    </div>
+                    <div class="">
+                        <p class="text-center">Not Registered? <a href="{% url 'blogapp:signup' %}" class="text-info" style="text-decoration: none;">Register</a> </p>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

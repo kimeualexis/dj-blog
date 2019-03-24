@@ -1,0 +1,47 @@
+{% extends 'blogapp/base.html' %}
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <div class="container-fluid pt-1">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card">
+                <img class="img img-responsive px-1 py-1" src="{{ post.cover.url }}" alt="" style="height: 230px; width: 90%;">
+                <div class="card-body">
+                    <h6>{{ post.title }}</h6>
+                    <p>By:&nbsp;{{ post.user }}</p>
+                    {% if post.user == request.user %}
+                    <a href="{% url 'blogapp:post-update' post.id %}" class="btn btn-info"><i class="fas fa-edit fa-xs"></i> </a>
+                    <a href="{% url 'blogapp:post-delete' post.id %}" class="btn btn-danger"><i class="fas fa-trash fa-xs"></i> </a>
+                    {% endif %}
+                    <small style="float: right;">{{ post.created|date:"F d, Y" }}</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-9">
+            <a href="" class="btn btn-outline-info btn-xs mb-2">Read</a>
+             <a href="{% url 'blogapp:comment-create' post.id %}" class="btn btn-outline-secondary btn-xs mb-2">Comment</a>
+            <br>
+            <div class="card">
+            <div class="card-body">
+            <p>{{ post.content }}</p>
+            </div>
+            </div>
+
+            <div class="comments">
+            {% if post.comment_set %}
+                <h6 class="text-secondary pt-1"><b>Comments:&nbsp;{{ post.comment_set.count }}</b></h6>
+                {% for comment in post.comment_set.all %}
+                    <p>{{ comment.comment }} {% if comment.user == request.user %}<a href="{% url 'blogapp:comment-delete' comment.id %}" class="btn btn-danger btn-sm mx-1" style="float:right;"><i class="fas fa-trash"></i></a><a href="{% url 'blogapp:comment-update' comment.id %}" class="btn btn-info btn-sm" style="float: right;"><i class="fas fa-edit"></i> </a>{% endif %}</p>
+                    <small>{{ comment.created|date:"F d, Y" }}<small style="float: right;">{{comment.user }}</small></small>
+
+
+                    <hr>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
