@@ -11,6 +11,9 @@ class PostListView(LoginRequiredMixin, ListView):
     model = Post
     ordering = '-created'
     context_object_name = 'posts'
+    
+    def get_queryset(self):
+        return Post.objects.filter(user=self.request.user)
 
 
 class PostDetailView(DetailView):
